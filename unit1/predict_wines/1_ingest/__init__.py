@@ -39,15 +39,15 @@ def get_dataframe(bs_acct_name, bs_container_name, credential, file_name):
         bs_container_client = bs_service_client.get_container_client(container=bs_container_name)
 
         # Get the dataframe! You'll see the following function digs as well.
-        wines_df = read_csv_to_dataframe(container_client=bs_container_client, filename=file_name)
-        logging.info(wines_df)
+        pandas_df = read_csv_to_dataframe(container_client=bs_container_client, filename=file_name)
+        logging.info(pandas_df)
 
     except Exception as e:
         logging.info(e)
         return (False, None, func.HttpResponse(f"The HTTP triggered function executed unsuccessfully. \n\t {e}!!",
                                     status_code=200))
 
-    return (True, wines_df, func.HttpResponse("The HTTP triggered function executed successfully."))
+    return (True, pandas_df, func.HttpResponse("The HTTP triggered function executed successfully."))
 
 
 # The data and the concepts of the following are from: https://www.kaggle.com/code/ankitakumar/linear-regression-using-wine-quality-dataset
