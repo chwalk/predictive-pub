@@ -40,7 +40,7 @@ def get_dataframe(bs_acct_name, bs_container_name, credential, file_name):
 
         # Get the dataframe! You'll see the following function digs as well.
         pandas_df = read_csv_to_dataframe(container_client=bs_container_client, filename=file_name)
-        logging.info(pandas_df)
+        # logging.info(pandas_df)
 
     except Exception as e:
         logging.info(e)
