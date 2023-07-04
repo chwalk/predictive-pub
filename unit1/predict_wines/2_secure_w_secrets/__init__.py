@@ -75,7 +75,7 @@ def predict(wines_df):
     residuals = np.abs(response_testing_df.values - prediction)
 
     # Calculate r-squared.
-    r_squared = algorithm.score(predictors_df, response_df)
+    r_squared = algorithm.score(predictors_training_df, response_training_df)
 
     results_str = f"The r-squared value of the data is {r_squared}. The mean of the residuals are {residuals.mean()} with a standard deviation of {residuals.std()}. Overall, linear regression does a fair job predicting the quality of wine."
     logging.info(results_str)
@@ -105,7 +105,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     bs_acct_name='winesetlstore<your id here>'
     bs_container_name='wines-etl-container'
     filename = 'winequality-red.csv'
-    key_vault_name = 'wines-kv-<your id here>'
+    key_vault_name = 'pa-wines-kv-<your id here>'
     blob_secret_name = 'wines-storage-secret'
     credential = get_credential_from_secret(key_vault_name, blob_secret_name)
 
