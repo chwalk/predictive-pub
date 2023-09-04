@@ -84,8 +84,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     # "bs" stands for "blob storage".
-    bs_acct_name='winesetlstore<your id here>'
-    bs_container_name='wines-etl-container'
+    bs_acct_name='winesstore<your id here>'
+    bs_container_name='wines-container'
     filename = 'winequality-red.csv'
     credential=<Put your blob storage access key here.>
 
