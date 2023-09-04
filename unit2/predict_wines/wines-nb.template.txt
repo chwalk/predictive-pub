@@ -1,0 +1,37 @@
+First cell:
+<THE CODE FROM THE DATA ASSET, CONSUME TAB, SHOULD GO HERE.>
+wines_df = dataset.to_pandas_dataframe()
+
+Next cell:
+import sklearn.model_selection as ms
+
+predictors_df = wines_df.iloc[:,:-1]
+response_df = wines_df.iloc[:,-1]
+
+# Split the data into training and testing sets.
+predictors_training_df, predictors_testing_df, \
+    response_training_df, response_testing_df \
+        = ms.train_test_split(predictors_df, response_df,
+            test_size=0.2)
+
+Next cell:
+import sklearn.linear_model as lm
+
+algorithm = lm.LinearRegression()
+model = algorithm.fit(predictors_training_df, response_training_df)
+prediction = model.predict(predictors_testing_df)
+
+Next cell:
+import numpy as np
+import sklearn.metrics as metrics
+
+# Calculate some characteristics of the residuals.
+residuals = np.abs(response_testing_df.values - prediction)
+
+# Calculate r-squared.
+r_squared = algorithm.score(predictors_training_df, response_training_df)
+
+mse = metrics.mean_squared_error(response_testing_df, prediction)
+rmse = np.sqrt(mse)
+
+print(f'The RMSE is {rmse} and the R squared value is {r_squared}.')
