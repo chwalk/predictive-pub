@@ -70,12 +70,12 @@ def predict(wines_df):
     prediction = model.predict(predictors_testing_df)
 
     # Calculate some characteristics of the residuals.
-    residuals = np.abs(response_testing_df.values - prediction)
+    residuals = response_testing_df.values - prediction
 
     # Calculate r-squared.
     r_squared = algorithm.score(predictors_training_df, response_training_df)
 
-    results_str = f"The r-squared value of the data is {r_squared}. The mean of the residuals are {residuals.mean()} with a standard deviation of {residuals.std()}. Overall, linear regression does a fair job predicting the quality of wine."
+    results_str = f"The r-squared value of the data is {r_squared}. The mean of the residuals are {np.abs(residuals).mean()} with a standard deviation of {np.abs(residuals).std()}. Overall, linear regression does a fair job predicting the quality of wine."
     logging.info(results_str)
     return func.HttpResponse(results_str)
 
