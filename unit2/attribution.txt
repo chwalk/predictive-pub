@@ -1,0 +1,1 @@
+The credit card data used with permission from William Greene, NYU Stern. I renamed his file named F7-3.csv to creditcard_data.csv.
