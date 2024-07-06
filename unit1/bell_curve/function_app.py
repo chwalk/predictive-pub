@@ -1,7 +1,9 @@
-import logging 
-import numpy as np 
-import azure.functions as func 
- 
+import azure.functions as func
+import datetime
+import json
+import logging
+import numpy as np
+
 
 bell_curve = None 
  
@@ -44,6 +46,10 @@ def handle_request(request: func.HttpRequest) -> func.HttpResponse:
         )
 
 
-def main(req: func.HttpRequest) -> func.HttpResponse: 
+app = func.FunctionApp()
+
+
+@app.route(route="general", auth_level=func.AuthLevel.ANONYMOUS)
+def general(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Received request.') 
-    return handle_request(req) 
+    return handle_request(req)
