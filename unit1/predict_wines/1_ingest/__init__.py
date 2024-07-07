@@ -1,11 +1,12 @@
-import logging
+import azure.functions as func
+import datetime
+import json
 import io
+import logging
 import numpy as np
 import pandas as pd
 import sklearn.linear_model as lm
 import sklearn.model_selection as ms
-
-import azure.functions as func
 from azure.storage.blob import BlobServiceClient
 
 
@@ -80,7 +81,10 @@ def predict(wines_df):
     return func.HttpResponse(results_str)
 
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+app = func.FunctionApp()
+
+@app.route(route="general", auth_level=func.AuthLevel.ANONYMOUS)
+def general(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     # "bs" stands for "blob storage".
