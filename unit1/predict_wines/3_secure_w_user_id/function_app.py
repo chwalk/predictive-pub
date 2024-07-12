@@ -104,7 +104,10 @@ def get_user_assigned_credential(client_id):
     return az_credential
 
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+app = func.FunctionApp()
+
+@app.route(route="general", auth_level=func.AuthLevel.ANONYMOUS)
+def general(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     # "bs" stands for "blob storage".
@@ -120,7 +123,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     (success, wines_df, response) = get_dataframe(bs_acct_name, bs_container_name, credential, filename)
     if success == False:
         return response
-
+    
     response = predict(wines_df)
 
     return response
